@@ -8,6 +8,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 ### Changed
 - Install Rust and Cargo to the *default* locations.
+- Install Rust toolchain with the `minimal` profile.
 
 ## r1 - 2024-08-27
 

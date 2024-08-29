@@ -14,10 +14,12 @@ RUN apt-get update \
        libclang-dev \
        libtss2-dev \
        pkg-config \
-    && apt-get clean -y
+       rdfind \
+    && rm -vrf /var/lib/apt/lists/* /var/cache/apt/*
 
 # Install Rust
-RUN curl https://sh.rustup.rs -sSf | sh -s -- --default-toolchain=${RUST_VERSION} -y
+RUN curl https://sh.rustup.rs -sSf | sh -s -- --default-toolchain=${RUST_VERSION} --profile=minimal -y \
+    && rdfind -makeresultsfile false -makesymlinks true /root
 
 # Start the shell
 ENTRYPOINT ["/bin/bash", "-l"]
