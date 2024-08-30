@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
+## r4 - 2024-08-30
+
+### Changed
+- Switched base system from `debian:bookworm-slim` to `bitnami/minideb:bookworm`
+
 ## r3 - 2024-08-30
 
 ### Changed

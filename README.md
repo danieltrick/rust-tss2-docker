@@ -10,6 +10,7 @@ Ready to use development environment with [Rust/Cargo](https://www.rust-lang.org
 Version history
 ---------------
 
-| **Release** | **Date**   | **Base system**       | **Rust toolchain** | **TPM2 Software Stack** |
-| ----------- | ---------- | --------------------- | ------------------ | ----------------------- |
-| r3          | 2024-08-30 | Debian 12, 2024-08-12 | 1.80.0             | 3.2.1-3                 |
+| **Release** | **Date**   | **Base system**                | **Rust toolchain** | **TPM2 Software Stack** |
+| ----------- | ---------- | ------------------------------ | ------------------ | ----------------------- |
+| r4          | 2024-08-30 | Minideb "Bookworm", 2024-08-30 | 1.80.0             | 3.2.1-3                 |
+| r3          | 2024-08-30 | Debian 12, 2024-08-12          | 1.80.0             | 3.2.1-3                 |
