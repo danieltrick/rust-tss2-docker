@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
+## r3 - 2024-08-30
+
+### Changed
+- Implemented multi-stage build to further reduce image size.
+
 ## r2 - 2024-08-29
 
 ### Changed
