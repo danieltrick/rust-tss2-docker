@@ -4,10 +4,13 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
-## r4 - 2024-08-30
+## r4 - 2024-08-31
 
 ### Changed
-- Switched base system from `debian:bookworm-slim` to `bitnami/minideb:bookworm`
+- Switched base system from `debian:bookworm-slim` to `bitnami/minideb:bookworm`.
+
+### Added
+- Added example Rust/Cargo project to the container image.
 
 ## r3 - 2024-08-30
 

@@ -18,8 +18,10 @@ RUN install_packages \
     rdfind
 
 # Install Rust
-RUN curl https://sh.rustup.rs -sSf | sh -s -- --default-toolchain=${RUST_VERSION} --profile=minimal -y \
-    && rdfind -makeresultsfile false -makesymlinks true /root
+RUN curl https://sh.rustup.rs -sSf | \
+        CARGO_HOME=/opt/rust/cargo RUSTUP_HOME=/opt/rust/rustup \
+        sh -s -- --default-toolchain=${RUST_VERSION} --profile=minimal -y \
+    && rdfind -makeresultsfile false -makesymlinks true /opt/rust/
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Stage #2
@@ -37,10 +39,21 @@ RUN install_packages \
     pkg-config
 
 # Copy Rust/Cargo files
-COPY --from=build /root/ /root/
+COPY --from=build /opt/rust/ /opt/rust/
 
-# Create symlinks
-RUN ln -s -t /usr/local/bin /root/.cargo/bin/*
+# Copy entry-point script
+COPY bin/entry-point.sh /opt/rust/entry-point.sh
 
-# Start the shell
-ENTRYPOINT ["/bin/bash"]
+# Copy example project
+COPY src/example/ /var/opt/rust/src/
+
+# Set up environment
+ENV RUSTUP_HOME=/opt/rust/rustup
+ENV CARGO_HOME=/opt/rust/cargo
+ENV CARGO_TARGET_DIR=/var/tmp/rust/target
+
+# Working directory
+WORKDIR /var/opt/rust/src
+
+# Entry point
+ENTRYPOINT ["/opt/rust/entry-point.sh"]
