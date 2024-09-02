@@ -1,5 +1,5 @@
 # Debian Version
-ARG DEBIAN_VERS=bitnami/minideb:bookworm
+ARG DEBIAN_VERS=debian:sid-slim
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Stage #1
@@ -12,10 +12,12 @@ ARG RUST_VERSION=1.80.0
 ENV DEBIAN_FRONTEND=noninteractive
 
 # Install build dependencies
-RUN install_packages \
-    ca-certificates \
-    curl \
-    rdfind
+RUN apt-get update -qq \
+    && apt-get install -y --no-install-recommends \
+        ca-certificates \
+        curl \
+        rdfind \
+    && rm -r /var/lib/apt/lists /var/cache/apt/archives
 
 # Install Rust
 RUN curl https://sh.rustup.rs -sSf | \
@@ -31,12 +33,15 @@ FROM $DEBIAN_VERS
 ENV DEBIAN_FRONTEND=noninteractive
 
 # Install runtime dependencies
-RUN install_packages \
-    ca-certificates \
-    gcc \
-    libclang-dev \
-    libtss2-dev \
-    pkg-config
+RUN apt-get update -qq \
+    && apt-get install -y --no-install-recommends \
+        ca-certificates \
+        gcc \
+        libclang-dev \
+        libtss2-dev \
+        pkg-config \
+        uuid-dev \
+    && rm -r /var/lib/apt/lists /var/cache/apt/archives
 
 # Copy Rust/Cargo files
 COPY --from=build /opt/rust/ /opt/rust/
