@@ -12,4 +12,5 @@ Version history
 
 | **Release** | **Date**   | **Base system**                   | **Rust toolchain** | **TPM2 Software Stack** |
 | ----------- | ---------- | --------------------------------- | ------------------ | ----------------------- |
+| r2          | 2024-09-05 | Debian Unstable (Sid), 2024-09-05 | 1.81.0             | 4.1.3-1                 |
 | r1          | 2024-09-03 | Debian Unstable (Sid), 2024-08-13 | 1.80.0             | 4.1.3-1                 |
