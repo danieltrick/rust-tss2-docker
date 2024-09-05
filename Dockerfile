@@ -7,7 +7,7 @@ ARG DEBIAN_VERS=bitnami/minideb:bookworm
 FROM $DEBIAN_VERS AS build
 
 # Rust version
-ARG RUST_VERSION=1.80.0
+ARG RUST_VERSION=1.81.0
 
 ENV DEBIAN_FRONTEND=noninteractive
 
