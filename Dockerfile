@@ -10,17 +10,17 @@ FROM $DEBIAN_VERS AS build
 ARG RUST_VERSION=nightly-2024-09-10
 
 # Set up environment
-ENV DEBIAN_FRONTEND=noninteractive
-ENV CARGO_HOME=/opt/rust/cargo 
 ENV RUSTUP_HOME=/opt/rust/rustup
+ENV CARGO_HOME=/opt/rust/cargo
+
+# Provide the 'install_packages' tool
+COPY src/install_packages.sh /usr/sbin/install_packages
 
 # Install build dependencies
-RUN apt-get update -qq \
-    && apt-get install -y --no-install-recommends \
-        ca-certificates \
-        curl \
-        rdfind \
-    && rm -r /var/lib/apt/lists /var/cache/apt/archives
+RUN install_packages \
+    ca-certificates \
+    curl \
+    rdfind
 
 # Install Rust
 RUN curl https://sh.rustup.rs -sSf | \
@@ -33,18 +33,25 @@ RUN curl https://sh.rustup.rs -sSf | \
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 FROM $DEBIAN_VERS
 
-ENV DEBIAN_FRONTEND=noninteractive
+# Set up environment
+ENV RUSTUP_HOME=/opt/rust/rustup
+ENV CARGO_HOME=/opt/rust/cargo
+ENV CARGO_TARGET_DIR=/var/tmp/rust/target
+
+# Provide the 'install_packages' tool
+COPY --from=build /usr/sbin/install_packages /usr/sbin/
+
+# Copy Rust/Cargo files
+COPY --from=build /opt/rust/ /opt/rust/
 
 # Install runtime dependencies
-RUN apt-get update -qq \
-    && apt-get install -y --no-install-recommends \
-        ca-certificates \
-        gcc \
-        libclang-dev \
-        libtss2-dev \
-        pkg-config \
-        uuid-dev \
-    && rm -r /var/lib/apt/lists /var/cache/apt/archives
+RUN install_packages \
+    ca-certificates \
+    gcc \
+    libclang-dev \
+    libtss2-dev \
+    pkg-config \
+    uuid-dev
 
 # Copy Rust/Cargo files
 COPY --from=build /opt/rust/ /opt/rust/
@@ -54,11 +61,6 @@ COPY bin/entry-point.sh /opt/rust/entry-point.sh
 
 # Copy example project
 COPY src/example/ /var/opt/rust/src/
-
-# Set up environment
-ENV RUSTUP_HOME=/opt/rust/rustup
-ENV CARGO_HOME=/opt/rust/cargo
-ENV CARGO_TARGET_DIR=/var/tmp/rust/target
 
 # Working directory
 WORKDIR /var/opt/rust/src
