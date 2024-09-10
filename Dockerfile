@@ -1,5 +1,5 @@
 # Debian Version
-ARG DEBIAN_VERS=debian:sid-slim
+ARG DEBIAN_VERS=debian:sid-20240904-slim
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Stage #1
@@ -7,9 +7,12 @@ ARG DEBIAN_VERS=debian:sid-slim
 FROM $DEBIAN_VERS AS build
 
 # Rust version
-ARG RUST_VERSION=1.81.0
+ARG RUST_VERSION=nightly-2024-09-10
 
+# Set up environment
 ENV DEBIAN_FRONTEND=noninteractive
+ENV CARGO_HOME=/opt/rust/cargo 
+ENV RUSTUP_HOME=/opt/rust/rustup
 
 # Install build dependencies
 RUN apt-get update -qq \
@@ -21,8 +24,8 @@ RUN apt-get update -qq \
 
 # Install Rust
 RUN curl https://sh.rustup.rs -sSf | \
-        CARGO_HOME=/opt/rust/cargo RUSTUP_HOME=/opt/rust/rustup \
-        sh -s -- --default-toolchain=${RUST_VERSION} --profile=minimal -y \
+    sh -s -- --default-toolchain=${RUST_VERSION} --profile=minimal -y \
+    && ${CARGO_HOME}/bin/rustup component add rustfmt \
     && rdfind -makeresultsfile false -makesymlinks true /opt/rust/
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
