@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
+## r6 - 2024-09-10
+
+### Added
+- Included the `rustfmt` component with the Rust installation.
+
+### Changed
+- Switched base system from `bitnami/minideb:bookworm` to `debian:12.7-slim`.
+
 ## r5 - 2024-09-05
 
 ### Changed

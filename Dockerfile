@@ -1,5 +1,5 @@
 # Debian Version
-ARG DEBIAN_VERS=bitnami/minideb:bookworm
+ARG DEBIAN_VERS=debian:12.7-slim
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Stage #1
@@ -9,18 +9,23 @@ FROM $DEBIAN_VERS AS build
 # Rust version
 ARG RUST_VERSION=1.81.0
 
+# Set up environment
 ENV DEBIAN_FRONTEND=noninteractive
+ENV CARGO_HOME=/opt/rust/cargo 
+ENV RUSTUP_HOME=/opt/rust/rustup
 
 # Install build dependencies
-RUN install_packages \
-    ca-certificates \
-    curl \
-    rdfind
+RUN apt-get update -qq \
+    && apt-get install -y --no-install-recommends \
+        ca-certificates \
+        curl \
+        rdfind \
+    && rm -r /var/lib/apt/lists /var/cache/apt/archives
 
 # Install Rust
 RUN curl https://sh.rustup.rs -sSf | \
-        CARGO_HOME=/opt/rust/cargo RUSTUP_HOME=/opt/rust/rustup \
-        sh -s -- --default-toolchain=${RUST_VERSION} --profile=minimal -y \
+    sh -s -- --default-toolchain=${RUST_VERSION} --profile=minimal -y \
+    && ${CARGO_HOME}/bin/rustup component add rustfmt \
     && rdfind -makeresultsfile false -makesymlinks true /opt/rust/
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -31,12 +36,14 @@ FROM $DEBIAN_VERS
 ENV DEBIAN_FRONTEND=noninteractive
 
 # Install runtime dependencies
-RUN install_packages \
-    ca-certificates \
-    gcc \
-    libclang-dev \
-    libtss2-dev \
-    pkg-config
+RUN apt-get update -qq \
+    && apt-get install -y --no-install-recommends \
+        ca-certificates \
+        gcc \
+        libclang-dev \
+        libtss2-dev \
+        pkg-config \
+    && rm -r /var/lib/apt/lists /var/cache/apt/archives
 
 # Copy Rust/Cargo files
 COPY --from=build /opt/rust/ /opt/rust/
