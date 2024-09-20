@@ -1,60 +1,34 @@
 # Debian Version
-ARG DEBIAN_VERS=debian:sid-20240904-slim
-
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# Stage #1
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-FROM $DEBIAN_VERS AS build
+FROM debian:sid-20240904-slim
 
 # Rust version
-ARG RUST_VERSION=nightly-2024-09-10
+ARG RUST_VERSION=nightly-2024-09-20
 
 # Set up environment
-ENV RUSTUP_HOME=/opt/rust/rustup
-ENV CARGO_HOME=/opt/rust/cargo
-
-# Provide the 'install_packages' tool
-COPY src/install_packages.sh /usr/sbin/install_packages
-
-# Install build dependencies
-RUN install_packages \
-    ca-certificates \
-    curl \
-    rdfind
-
-# Install Rust
-RUN curl https://sh.rustup.rs -sSf | \
-    sh -s -- --default-toolchain=${RUST_VERSION} --profile=minimal -y \
-    && ${CARGO_HOME}/bin/rustup component add rustfmt \
-    && rdfind -makeresultsfile false -makesymlinks true /opt/rust/
-
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# Stage #2
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-FROM $DEBIAN_VERS
-
-# Set up environment
-ENV RUSTUP_HOME=/opt/rust/rustup
-ENV CARGO_HOME=/opt/rust/cargo
+ENV CARGO_HOME="/usr/local/cargo"
+ENV RUSTUP_HOME="/usr/local/rustup"
 ENV CARGO_TARGET_DIR=/var/tmp/rust/target
 
 # Provide the 'install_packages' tool
-COPY --from=build /usr/sbin/install_packages /usr/sbin/
-
-# Copy Rust/Cargo files
-COPY --from=build /opt/rust/ /opt/rust/
+COPY bin/install_packages.sh /usr/sbin/install_packages
 
 # Install runtime dependencies
 RUN install_packages \
     ca-certificates \
+    curl \
     gcc \
     libclang-dev \
     libtss2-dev \
     pkg-config \
     uuid-dev
 
-# Copy Rust/Cargo files
-COPY --from=build /opt/rust/ /opt/rust/
+# Install Rust
+RUN curl https://sh.rustup.rs -sSf | \
+    sh -s -- --default-toolchain=${RUST_VERSION} --profile=minimal -y \
+    && ${CARGO_HOME}/bin/rustup component add rustfmt
+
+# Copy 'rebuild' command
+COPY bin/cargo-rebuild.sh /usr/local/cargo/bin/cargo-rebuild
 
 # Copy entry-point script
 COPY bin/entry-point.sh /opt/rust/entry-point.sh
