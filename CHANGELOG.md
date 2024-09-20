@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
+## r7 - 2024-09-20
+
+### Changed
+- Switched base system from `debian:12.7-slim` to `rust:1.*-slim-bookworm`.
+
+### Added
+- Included the `cargo-rebuild` command.
+
 ## r6 - 2024-09-10
 
 ### Added
