@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
+## r8 - 2024-09-28
+
+### Changed
+- Updated base system to Debian 12.7 (2024-09-27).
+
 ## r7 - 2024-09-20
 
 ### Changed
