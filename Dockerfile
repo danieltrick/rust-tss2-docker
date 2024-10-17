@@ -1,8 +1,8 @@
 # Debian Version
-FROM debian:sid-20240926-slim@sha256:12f32e3af969bccab48f38553542a6fa0e84103587ace94537dc2430e12c0b14
+FROM debian:sid-20241016-slim@sha256:7bee69f270ab968dbb059bd9b33100503b9c4f52e8d0da2c267d48e4b06bac3d
 
 # Rust version
-ARG RUST_VERSION=nightly-2024-09-28
+ARG RUST_VERSION=nightly-2024-10-17
 
 # Set up environment
 ENV CARGO_HOME="/usr/local/cargo"
