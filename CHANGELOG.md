@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
+## Unstable/Sid r7 - 2024-12-03
+
+### Changed
+- Updated base system to Debian Sid (2024-12-02).
+- Updated Rust/Cargo toolchain to version 1.85.0-nightly (2024-12-03).
+
 ## Unstable/Sid r6 - 2024-10-17
 
 ### Changed
