@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
+## r12 - 2025-02-25
+
+### Added
+- Enabled multi-platform build for `linux/amd64` and `linux/arm64`
+
+### Changed
+- Updated Rust/Cargo toolchain to version 1.85.0 (2025-02-20).
+
 ## r11 - 2025-01-11
 
 ### Changed
