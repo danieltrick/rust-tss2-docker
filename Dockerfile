@@ -1,5 +1,5 @@
 # Rust version
-FROM rust:1.85.0-slim-bookworm@sha256:656b27d4e2eef8905f3edebb96214ebaab9931b9416fb91918e992ec8a6bdea0
+FROM rust:1.85.1-slim-bookworm@sha256:9f841bbe9e7d8e37ceb96ed907265a3a0df7f44e3737d0b100e7907a679acb36
 
 # Set up environment
 ENV CARGO_HOME="/usr/local/cargo"
