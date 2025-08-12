@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
+## r18 - 2025-08-12
+
+### Changed
+- Updated Rust/Cargo toolchain to version 1.89.0 (2025-08-07).
+- Updated base system to Debian 13.0 (2025-08-09).
+
 ## r17 - 2025-07-01
 
 ### Changed
