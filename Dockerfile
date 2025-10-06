@@ -1,5 +1,5 @@
 # Rust version
-FROM rust:1.89.0-slim-trixie@sha256:66b72adf68141957a2257408576a55f884c2cf9ae32724a713e9a1ad2e069d00
+FROM rust:1.90.0-trixie@sha256:976303ceda00c5f21d6fe97500927285c7e0f6a2e8df71ae18a6c8e9b37550a1
 
 # Set up environment
 ENV CARGO_HOME="/usr/local/cargo"
@@ -14,11 +14,12 @@ RUN install_packages \
     ca-certificates \
     gcc \
     libclang-dev \
-    libtss2-dev \
-    pkg-config \
+    libcurl4-openssl-dev \
     libjson-c-dev \
     libssl-dev \
-    libcurl4-openssl-dev
+    libtss2-dev \
+    pkg-config \
+    uuid-dev
 
 # Install Rust components
 RUN rustup component add rustfmt
