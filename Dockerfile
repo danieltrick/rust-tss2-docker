@@ -1,5 +1,5 @@
 # Rust version
-FROM rust:1.92.0-trixie@sha256:02fc8ce2ce3d93ba228e503907fee24d9796c837eda6ba382da3917bc4416857
+FROM rust:1.93.0-trixie@sha256:4c7eb947d7e078f5c076e086c7b75c36ea0ec7c685f2244b3d79306deb7e44b7
 
 # Set up environment
 ENV CARGO_HOME="/usr/local/cargo"
@@ -22,7 +22,8 @@ RUN install_packages \
     uuid-dev
 
 # Install Rust components
-RUN rustup component add rustfmt
+RUN rustup component add rustfmt && \
+    rustup component add clippy
 
 # Copy 'rebuild' command
 COPY bin/cargo-rebuild.sh /usr/local/cargo/bin/cargo-rebuild
