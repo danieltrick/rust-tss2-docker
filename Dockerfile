@@ -19,6 +19,7 @@ RUN install_packages \
     cmake \
     curl \
     git \
+    libclang-dev \
     libcurl4-openssl-dev \
     libjson-c-dev \
     libltdl-dev \
