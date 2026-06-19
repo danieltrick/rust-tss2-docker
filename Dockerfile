@@ -1,5 +1,5 @@
 # Debian Version
-FROM debian:sid-20260610-slim
+FROM debian:trixie-20260610-slim
 
 # Set up environment
 ENV CARGO_HOME="/usr/local/cargo"
@@ -11,16 +11,33 @@ COPY bin/install_packages.sh /usr/sbin/install_packages
 
 # Install runtime dependencies
 RUN install_packages \
+    autoconf \
+    autoconf-archive \
+    automake \
+    build-essential \
     ca-certificates \
+    cmake \
     curl \
-    gcc \
-    libclang-dev \
+    git \
     libcurl4-openssl-dev \
     libjson-c-dev \
+    libltdl-dev \
     libssl-dev \
-    libtss2-dev \
-    pkg-config \
+    libtool \
+    pkgconf \
     uuid-dev
+
+# Build libtss2
+RUN git clone --branch master --single-branch https://github.com/tpm2-software/tpm2-tss.git /tmp/tpm2-tss-build && \
+    cd /tmp/tpm2-tss-build && \
+    git checkout -B master 2491735cf86837a3e5e6a484fc4224a490e322b0 && \
+    ./bootstrap && \
+    ./configure --disable-doxygen-doc && \
+    make -j$(nproc) && \
+    make -j$(nproc) install && \
+    cd / && \
+    rm -rf /tmp/tpm2-tss-build && \
+    ldconfig
 
 # Install Rust
 RUN curl https://sh.rustup.rs -sSf | sh -s -- --default-toolchain=nightly-2026-06-19 --profile=minimal -y && \
