@@ -1,15 +1,12 @@
 # Debian Version
-FROM debian:sid-20241202-slim@sha256:2eac978892d960f967fdad9a5387eb0bf5addfa3fab7f6fa09a00e0adff7975d
-
-# Rust version
-ARG RUST_VERSION=nightly-2024-12-03
+FROM debian:sid-20260610-slim
 
 # Set up environment
 ENV CARGO_HOME="/usr/local/cargo"
 ENV RUSTUP_HOME="/usr/local/rustup"
 ENV CARGO_TARGET_DIR=/var/tmp/rust/target
 
-# Provide the 'install_packages' tool
+# Provide the 'install_packages' helper script
 COPY bin/install_packages.sh /usr/sbin/install_packages
 
 # Install runtime dependencies
@@ -18,14 +15,17 @@ RUN install_packages \
     curl \
     gcc \
     libclang-dev \
+    libcurl4-openssl-dev \
+    libjson-c-dev \
+    libssl-dev \
     libtss2-dev \
     pkg-config \
     uuid-dev
 
 # Install Rust
-RUN curl https://sh.rustup.rs -sSf | \
-    sh -s -- --default-toolchain=${RUST_VERSION} --profile=minimal -y \
-    && ${CARGO_HOME}/bin/rustup component add rustfmt
+RUN curl https://sh.rustup.rs -sSf | sh -s -- --default-toolchain=nightly-2026-06-19 --profile=minimal -y && \
+    ${CARGO_HOME}/bin/rustup component add rustfmt && \
+    ${CARGO_HOME}/bin/rustup component add clippy
 
 # Copy 'rebuild' command
 COPY bin/cargo-rebuild.sh /usr/local/cargo/bin/cargo-rebuild
