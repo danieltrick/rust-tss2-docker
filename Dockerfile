@@ -1,5 +1,5 @@
 # Debian Version
-FROM debian:trixie-20260610-slim
+FROM debian:trixie-20260623-slim
 
 # Set up environment
 ENV CARGO_HOME="/usr/local/cargo"
@@ -31,7 +31,7 @@ RUN install_packages \
 # Build libtss2
 RUN git clone --branch master --single-branch https://github.com/tpm2-software/tpm2-tss.git /tmp/tpm2-tss-build && \
     cd /tmp/tpm2-tss-build && \
-    git checkout -B master 2491735cf86837a3e5e6a484fc4224a490e322b0 && \
+    git checkout -B master 66bd97670ba2a14fe0c2d9e73ae3b4329d318e8b && \
     ./bootstrap && \
     ./configure --disable-doxygen-doc && \
     make -j$(nproc) && \
@@ -41,7 +41,7 @@ RUN git clone --branch master --single-branch https://github.com/tpm2-software/t
     ldconfig
 
 # Install Rust
-RUN curl https://sh.rustup.rs -sSf | sh -s -- --default-toolchain=nightly-2026-06-19 --profile=minimal -y && \
+RUN curl https://sh.rustup.rs -sSf | sh -s -- --default-toolchain=nightly-2026-07-13 --profile=minimal -y && \
     ${CARGO_HOME}/bin/rustup component add rustfmt && \
     ${CARGO_HOME}/bin/rustup component add clippy
 
