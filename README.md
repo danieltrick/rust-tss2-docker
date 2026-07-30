@@ -12,5 +12,6 @@ Version history
 
 | **Release** | **Date**   | **Base system**         | **Rust toolchain**         | **TPM2 Software Stack**                                                                      |
 | ----------- | ---------- | ----------------------- | -------------------------- | -------------------------------------------------------------------------------------------- |
+| r3          | 2026-07-30 | Debian 13.6, 2026-07-11 | 1.99.0-nightly, 2026-07-30 | [`506c5e6db0c8`](https://github.com/tpm2-software/tpm2-tss/commits/506c5e6db0c8), 2026-07-15 |
 | r2          | 2026-07-13 | Debian 13.5, 2026-06-23 | 1.99.0-nightly, 2026-07-12 | [`66bd97670ba2`](https://github.com/tpm2-software/tpm2-tss/commits/66bd97670ba2), 2026-07-13 |
 | r1          | 2026-06-19 | Debian 13.5, 2026-06-10 | 1.98.0-nightly, 2026-06-17 | [`2491735cf868`](https://github.com/tpm2-software/tpm2-tss/commits/2491735cf868), 2026-06-17 |
