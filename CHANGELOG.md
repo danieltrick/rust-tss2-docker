@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
+## r31 - 2026-07-30
+
+### Changed
+- Updated Rust/Cargo toolchain to version 1.97.1 (2026-07-16).
+- Updated base system to Debian 13.6 (2025-07-11).
+
 ## r30 - 2026-07-13
 
 ### Changed

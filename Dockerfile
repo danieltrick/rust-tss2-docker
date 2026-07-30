@@ -1,5 +1,5 @@
 # Rust version
-FROM rust:1.97.0-trixie@sha256:44637ff22d0a6571a221bfaf137849711ad02ff4723dbb4736e297538f6a3e60
+FROM rust:1.97.1-trixie@sha256:1bcff4befb740599103a2c7cb51058e14479b2e35e3a34a3f0dc4ede09927488
 
 # Set up environment
 ENV CARGO_HOME="/usr/local/cargo"
