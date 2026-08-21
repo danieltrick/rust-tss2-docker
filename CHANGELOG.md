@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
+## Unstable/Sid r11 - 2026-08-21
+
+### Changed
+- Updated Rust/Cargo toolchain to version 1.100.0-nightly (2026-08-20).
+
 ## Unstable/Sid r10 - 2026-08-14
 
 ### Changed
