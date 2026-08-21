@@ -41,7 +41,7 @@ RUN git clone --branch master --single-branch https://github.com/tpm2-software/t
     ldconfig
 
 # Install Rust
-RUN curl https://sh.rustup.rs -sSf | sh -s -- --default-toolchain=nightly-2026-08-13 --profile=minimal -y && \
+RUN curl https://sh.rustup.rs -sSf | sh -s -- --default-toolchain=nightly-2026-08-20 --profile=minimal -y && \
     ${CARGO_HOME}/bin/rustup component add rustfmt && \
     ${CARGO_HOME}/bin/rustup component add clippy
 
