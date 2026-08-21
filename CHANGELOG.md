@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
+## r33 - 2026-08-21
+
+### Changed
+- Updated Rust/Cargo toolchain to version 1.98.0 (2026-08-21).
+
 ## r32 - 2026-08-14
 
 ### Changed
