@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
+## Snapshot r7 - 2026-10-02
+
+- Updated base system to Debian 13.7 (2025-09-12).
+- Updated Rust/Cargo toolchain to version 1.101.0-nightly (2026-10-02).
+- Updated libtss2 to revision `d50e55b13a96` (2026-09-28).
+
 ## Snapshot r6 - 2026-09-10
 
 - Updated base system to Debian 13.6 (2025-08-24).

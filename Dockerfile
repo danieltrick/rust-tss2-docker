@@ -1,5 +1,5 @@
-# Debian Version
-FROM debian:trixie-20260824-slim
+# Rust version
+FROM rustlang/rust:nightly-trixie-2026-10-02@sha256:741c0a96047c0776fc59fc4407fe52cf27c03d8f7981ddd32c6bec189a468e0a
 
 # Set up environment
 ENV CARGO_HOME="/usr/local/cargo"
@@ -31,7 +31,7 @@ RUN install_packages \
 # Build libtss2
 RUN git clone --branch master --single-branch https://github.com/tpm2-software/tpm2-tss.git /tmp/tpm2-tss-build && \
     cd /tmp/tpm2-tss-build && \
-    git checkout -B master d32903d1b7b9da7a12020e303fec982449be69ed && \
+    git checkout -B master d50e55b13a968a0c1dc4e127ffe1aa5eb8c3f71c && \
     ./bootstrap && \
     ./configure --disable-doxygen-doc && \
     make -j$(nproc) && \
@@ -40,10 +40,9 @@ RUN git clone --branch master --single-branch https://github.com/tpm2-software/t
     rm -rf /tmp/tpm2-tss-build && \
     ldconfig
 
-# Install Rust
-RUN curl https://sh.rustup.rs -sSf | sh -s -- --default-toolchain=nightly-2026-09-10 --profile=minimal -y && \
-    ${CARGO_HOME}/bin/rustup component add rustfmt && \
-    ${CARGO_HOME}/bin/rustup component add clippy
+# Install Rust components
+RUN rustup component add rustfmt && \
+    rustup component add clippy
 
 # Copy 'rebuild' command
 COPY bin/cargo-rebuild.sh /usr/local/cargo/bin/cargo-rebuild
