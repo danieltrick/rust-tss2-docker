@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
+## r35 - 2026-10-02
+
+### Changed
+- Updated Rust/Cargo toolchain to version 1.99.0 (2026-10-01).
+- Updated base system to Debian 13.7 (2026-09-12).
+
 ## r34 - 2026-09-10
 
 ### Changed
@@ -23,7 +29,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 ### Changed
 - Updated Rust/Cargo toolchain to version 1.97.1 (2026-07-16).
-- Updated base system to Debian 13.6 (2025-07-11).
+- Updated base system to Debian 13.6 (2026-07-11).
 
 ## r30 - 2026-07-13
 
@@ -39,7 +45,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 ### Changed
 - Updated Rust/Cargo toolchain to version 1.96.0 (2026-05-29).
-- Updated base system to Debian 13.5 (2025-05-16).
+- Updated base system to Debian 13.5 (2026-05-16).
 
 ## r27 - 2026-04-24
 
