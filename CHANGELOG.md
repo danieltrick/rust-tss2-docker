@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
+## r36 - 2026-11-12
+
+### Added
+- Added package `nodejs` to the pre-installed Debian packages.
+
+### Changed
+- Updated Rust/Cargo toolchain to version 1.99.1 (2026-11-06).
+
 ## r35 - 2026-10-02
 
 ### Changed

@@ -1,5 +1,5 @@
 # Rust version
-FROM rust:1.99.0-trixie@sha256:cb1b90b0ce00f9eb950c4de62cc1bb89c7bf8a3577de6600d10e31fb15f876de
+FROM rust:1.99.1-trixie@sha256:8a4e90c7946b74626488b1446f712c0fe0ed1a596cbd3d871684bc9c5433ae07
 
 # Set up environment
 ENV CARGO_HOME="/usr/local/cargo"
@@ -18,6 +18,7 @@ RUN install_packages \
     libjson-c-dev \
     libssl-dev \
     libtss2-dev \
+    nodejs \
     pkg-config \
     uuid-dev
 
