@@ -1,5 +1,5 @@
 # Rust version
-FROM rustlang/rust:nightly-trixie-2026-10-02@sha256:741c0a96047c0776fc59fc4407fe52cf27c03d8f7981ddd32c6bec189a468e0a
+FROM rustlang/rust:nightly-trixie-2026-11-13@sha256:1b756ba7156fa53983f942a0038b8680ee921219ce7fe1be7a480be1b373230e
 
 # Set up environment
 ENV CARGO_HOME="/usr/local/cargo"
@@ -25,13 +25,14 @@ RUN install_packages \
     libltdl-dev \
     libssl-dev \
     libtool \
+    nodejs \
     pkgconf \
     uuid-dev
 
 # Build libtss2
 RUN git clone --branch master --single-branch https://github.com/tpm2-software/tpm2-tss.git /tmp/tpm2-tss-build && \
     cd /tmp/tpm2-tss-build && \
-    git checkout -B master d50e55b13a968a0c1dc4e127ffe1aa5eb8c3f71c && \
+    git checkout -B master d21de645c1a8a2ffadbe6186db2b0fdb8a19eb00 && \
     ./bootstrap && \
     ./configure --disable-doxygen-doc && \
     make -j$(nproc) && \
